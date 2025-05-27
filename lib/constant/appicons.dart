@@ -17,4 +17,10 @@ class Appicons {
   static const IconData close = Icons.close;
   static const IconData arrow_back = Icons.arrow_back;
   static const IconData arrow_forward = Icons.arrow_forward;
+  static const IconData favorite = Icons.favorite;
+  static const IconData rupee = Icons.currency_rupee;
+  static const IconData cart_shopping_outlined = Icons.shopping_cart_outlined;
+  static const IconData location = Icons.location_on;
+  static const IconData reply = Icons.replay;
+  static const IconData coupen = Icons.countertops_outlined;
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:stylish/view/auth/login_screen.dart';
-import 'package:stylish/view/auth/onboarding.dart';
-import 'package:stylish/view/auth/signup_screen.dart';
-import 'package:stylish/view/auth/splash_screen.dart';
+import 'package:stylish/view/Checkout/checkout_screen.dart';
+import 'package:stylish/view/Shoping_Bag/shoping_bag_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +23,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Stylish',
-          home: Onboarding(),
+          home: ShopingBagScreen(),
         );
       },
     );

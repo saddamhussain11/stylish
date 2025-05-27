@@ -9,4 +9,5 @@ class Appcolors {
   static const weightColor = Color(0xffffffff);
   static const blackColor = Color(0xff020204);
   static const greyColor = Color(0xffF3F3F3);
+  static const amber = Colors.amber;
 }
