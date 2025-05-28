@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/utils/snackbar_utils.dart';
+import 'package:stylish/view/auth/login_screen.dart';
 import 'package:stylish/widget/Button/Custom_Buton.dart';
 import 'package:stylish/widget/Fields/custom_textfield.dart';
 
@@ -17,6 +22,37 @@ class _LoginScreenState extends State<SignupScreen> {
   TextEditingController emailcontroler = TextEditingController();
   TextEditingController paswordcontroler = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+  bool isloading = false;
+
+  void signup() async {
+    try {
+      setState(() {
+        isloading = true;
+      });
+
+      final response = await http.post(
+        Uri.parse('https://reqres.in/api/register'),
+        body: {'email': emailcontroler.text, 'password': paswordcontroler.text},
+        headers: {'x-api-key': 'reqres-free-v1'},
+      );
+
+      if (response.statusCode == 200) {
+        Get.to(LoginScreen());
+        SnackbarUtil.showSuccess('Creat acount succes');
+        print(response.statusCode);
+        print(response.body);
+      } else {
+        SnackbarUtil.showError('Creat Fail');
+        print('faillllllll');
+      }
+    } catch (e) {
+      SnackbarUtil.showError('Creat Fail');
+    } finally {
+      setState(() {
+        isloading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +84,7 @@ class _LoginScreenState extends State<SignupScreen> {
                         spacing: 26.h,
                         children: [
                           CustomTextfield(
+                            controller: emailcontroler,
                             width: 30.w,
                             color: Appcolors.greyColor,
                             labeltext: 'Enter your Ful Email',
@@ -61,6 +98,7 @@ class _LoginScreenState extends State<SignupScreen> {
                             },
                           ),
                           CustomTextfield(
+                            controller: paswordcontroler,
                             width: 30.w,
                             color: Appcolors.greyColor,
                             labeltext: 'Enter your pasword',
@@ -74,24 +112,24 @@ class _LoginScreenState extends State<SignupScreen> {
                               return null;
                             },
                           ),
-                          CustomTextfield(
-                            width: 320.w,
-                            color: Appcolors.greyColor,
-                            iconData: Appicons.lock,
-                            border: true,
-                            labeltext: 'Enter your confirm pasword',
-                            inputType: TextInputType.visiblePassword,
+                          // CustomTextfield(
+                          //   width: 320.w,
+                          //   color: Appcolors.greyColor,
+                          //   iconData: Appicons.lock,
+                          //   border: true,
+                          //   labeltext: 'Enter your confirm pasword',
+                          //   inputType: TextInputType.visiblePassword,
 
-                            showSuffixIcon: true,
-                            validator: (value) {
-                              if (value == '' || value == null) {
-                                return 'Please enter your confirm Pasword';
-                              } else if (value.length < 6) {
-                                return 'Enter at least 6 digit';
-                              }
-                              return null;
-                            },
-                          ),
+                          //   showSuffixIcon: true,
+                          //   validator: (value) {
+                          //     if (value == '' || value == null) {
+                          //       return 'Please enter your confirm Pasword';
+                          //     } else if (value.length < 6) {
+                          //       return 'Enter at least 6 digit';
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
                         ],
                       ),
                     ),
@@ -130,12 +168,17 @@ class _LoginScreenState extends State<SignupScreen> {
 
                     SizedBox(height: 45.h),
                     Custombuton(
+                      isLoading: isloading,
                       backgroundColor: Appcolors.pinkColor,
                       height: 55.h,
                       width: 320.w,
                       borderRadius: BorderRadius.circular(5.r),
                       title: 'Create Account',
-                      ontap: () {},
+                      ontap: () {
+                        if (_formkey.currentState!.validate()) {
+                          signup();
+                        }
+                      },
                     ),
 
                     SizedBox(height: 28.h),
@@ -151,13 +194,10 @@ class _LoginScreenState extends State<SignupScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => SignupScreen()));
+                            Get.to(LoginScreen());
                           },
                           child: Text(
-                            'Login8',
+                            'Login',
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w500,

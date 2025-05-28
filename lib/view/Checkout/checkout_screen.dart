@@ -62,38 +62,40 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20.h),
-            Text(
-              'Cart List',
-              style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10.h),
-            Padding(
-              padding: EdgeInsets.all(10.w),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: dummyData.length,
-                itemBuilder: (context, index) {
-                  final item = dummyData[index];
-                  return CheckoutCard(
-                    image: item["image"],
-                    title: item["title"],
-                    variations: item["variations"],
-                    rating: item["rating"],
-                    price: item["price"],
-                    oldPrice: item["oldPrice"],
-                    off: item["off"],
-                    orderCount: item["orderCount"],
-                  );
-                },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20.h),
+              Text(
+                'Cart List',
+                style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              SizedBox(height: 10.h),
+              Padding(
+                padding: EdgeInsets.all(10.w),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: dummyData.length,
+                  itemBuilder: (context, index) {
+                    final item = dummyData[index];
+                    return CheckoutCard(
+                      image: item["image"],
+                      title: item["title"],
+                      variations: item["variations"],
+                      rating: item["rating"],
+                      price: item["price"],
+                      oldPrice: item["oldPrice"],
+                      off: item["off"],
+                      orderCount: item["orderCount"],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -23,4 +23,8 @@ class Appicons {
   static const IconData location = Icons.location_on;
   static const IconData reply = Icons.replay;
   static const IconData coupen = Icons.countertops_outlined;
+  static const IconData seting = Icons.settings;
+  static const IconData warning = Icons.warning;
+  static const IconData error = Icons.error;
+  static const IconData succes = Icons.check_circle;
 }

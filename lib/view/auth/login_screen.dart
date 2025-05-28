@@ -6,7 +6,10 @@ import 'package:http/http.dart' as http;
 
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/utils/snackbar_utils.dart';
+import 'package:stylish/view/Botom_Navigartion/botom_navigation_screen.dart';
 import 'package:stylish/view/auth/forgat_screen.dart';
+import 'package:stylish/view/auth/signup_screen.dart';
 import 'package:stylish/widget/Button/Custom_Buton.dart';
 import 'package:stylish/widget/Fields/custom_textfield.dart';
 
@@ -30,10 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
         isLoading = true;
       }); // hit the API endpoint for login
       final response = await http.post(
-        Uri.parse('https://reqres.in/api/register'),
+        Uri.parse('https://reqres.in/api/login'),
         body: {
-          'email': 'eve.holt@reqres.in',
-          'password': 'pistol',
+          'email': emailcontroler.text,
+          'password': paswordcontroler.text,
           'adress': 'khanpur',
         },
         headers: {'x-api-key': 'reqres-free-v1'},
@@ -42,20 +45,20 @@ class _LoginScreenState extends State<LoginScreen> {
       print(response.statusCode);
 
       if (response.statusCode == 200) {
+        Get.to(BotomNavigationScreen());
+        SnackbarUtil.showSuccess('Login Succes');
         print('Signup successful');
         print(response.body.toString());
       } else {
         print('Login failed');
       }
-
-      setState(() {
-        isLoading = false;
-      });
     } catch (e) {
+      SnackbarUtil.showError('Login Fail');
+      print(e.toString());
+    } finally {
       setState(() {
         isLoading = false;
       });
-      print(e.toString());
     }
   }
 
@@ -153,7 +156,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(5.r),
                       title: 'Login',
                       ontap: () {
-                        login();
+                        if (_formkey.currentState!.validate()) {
+                          login();
+                        }
                       },
                     ),
 
@@ -170,10 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => SignupScreen()));
+                            Get.to(SignupScreen());
                           },
                           child: Text(
                             'Sign up',
