@@ -197,7 +197,26 @@ class _ShopingBagScreenState extends State<ShopingBagScreen> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 5.h),
+                                      SizedBox(height: 8.h),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "Diliver By",
+                                            style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          SizedBox(width: 10.w),
+                                          Text(
+                                            "10 May 2XXX",
+                                            style: TextStyle(
+                                              fontSize: 17.sp,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/view/auth/forgat_screen.dart';
 import 'package:stylish/widget/Button/Custom_Buton.dart';
 import 'package:stylish/widget/Fields/custom_textfield.dart';
 
@@ -17,6 +21,43 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailcontroler = TextEditingController();
   TextEditingController paswordcontroler = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+  bool isLoading = false;
+  void login() async {
+    print('Tap on Login Button');
+
+    try {
+      setState(() {
+        isLoading = true;
+      }); // hit the API endpoint for login
+      final response = await http.post(
+        Uri.parse('https://reqres.in/api/register'),
+        body: {
+          'email': 'eve.holt@reqres.in',
+          'password': 'pistol',
+          'adress': 'khanpur',
+        },
+        headers: {'x-api-key': 'reqres-free-v1'},
+      );
+      print('api hit successfully');
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print('Signup successful');
+        print(response.body.toString());
+      } else {
+        print('Login failed');
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         spacing: 26.h,
                         children: [
                           CustomTextfield(
+                            controller: emailcontroler,
                             width: 30.w,
                             color: Appcolors.greyColor,
                             labeltext: 'Enter your Ful Email',
@@ -61,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                           CustomTextfield(
+                            controller: paswordcontroler,
                             width: 320.w,
                             color: Appcolors.greyColor,
                             iconData: Appicons.lock,
@@ -87,10 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => ForgatpaswordScreen()));
+                            Get.to(ForgatScreen());
                           },
                           child: Text(
                             textAlign: TextAlign.end,
@@ -106,12 +146,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 45.h),
                     Custombuton(
+                      isLoading: isLoading,
                       backgroundColor: Appcolors.pinkColor,
                       height: 55.h,
                       width: 320.w,
                       borderRadius: BorderRadius.circular(5.r),
                       title: 'Login',
-                      ontap: () {},
+                      ontap: () {
+                        login();
+                      },
                     ),
 
                     SizedBox(height: 28.h),
