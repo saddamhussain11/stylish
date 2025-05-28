@@ -1,11 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/controller/backend/my_profile_controller.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final MyProfileController myProfileController = Get.put(
+    MyProfileController(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    myProfileController.fetchUserProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,51 +39,68 @@ class ProfileScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 20.h),
-          Center(
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 60.r,
-                  backgroundColor: Appcolors.weightColor,
-                ),
-                Positioned(
-                  left: 8.w,
-                  child: CircleAvatar(
-                    radius: 50.r,
-                    backgroundImage: AssetImage(Appimages.profile),
-                  ),
-                ),
-                Positioned(
-                  top: 60.h,
-                  left: 80.w,
-                  child: CircleAvatar(
-                    radius: 15.r,
-                    backgroundColor: Appcolors.litebluColor,
-                    child: IconButton(
-                      icon: Icon(
-                        Appicons.edit,
-                        size: 13.sp,
-                        color: Appcolors.weightColor,
-                      ),
-                      onPressed: () {
-                        // Add your edit profile logic here
-                      },
-                    ),
-                  ),
-                ),
-              ],
+      body: Obx(() {
+        if (myProfileController.isLoading.value) {
+          return const Center(child: CupertinoActivityIndicator(radius: 30));
+        } else if (myProfileController.listData.isEmpty) {
+          return Center(
+            child: ElevatedButton(
+              onPressed: () => myProfileController.fetchUserProfile(),
+              child: const Text('Fetch Profile'),
             ),
-          ),
-          SizedBox(height: 10.h),
-          Text(
-            'Name',
-            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
+          );
+        } else {
+          final profile = myProfileController.listData.first;
+
+          return Column(
+            children: [
+              SizedBox(height: 20.h),
+              Center(
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 60.r,
+                      backgroundColor: Appcolors.weightColor,
+                    ),
+                    Positioned(
+                      left: 8.w,
+                      child: CircleAvatar(
+                        radius: 50.r,
+                        backgroundImage: NetworkImage(
+                          profile.data?.avatar ?? '',
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 60.h,
+                      left: 80.w,
+                      child: CircleAvatar(
+                        radius: 15.r,
+                        backgroundColor: Appcolors.litebluColor,
+                        child: IconButton(
+                          icon: Icon(
+                            Appicons.edit,
+                            size: 13.sp,
+                            color: Appcolors.weightColor,
+                          ),
+                          onPressed: () {
+                            myProfileController.fetchUserProfile();
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Text(
+                profile.data?.firstName ?? 'Name not available',
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+              ),
+            ],
+          );
+        }
+      }),
     );
   }
 }

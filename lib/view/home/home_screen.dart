@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:stylish/constant/appicons.dart';
 import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/view/Detail/detail_screen.dart';
 import 'package:stylish/widget/card/home/home_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -148,15 +151,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               itemBuilder: (context, index) {
                 final product = productList[index];
-                return HomeCard(
-                  imagePath: product['imagePath'],
-                  title: product['title'],
-                  description: product['description'],
-                  price: product['price'],
-                  oldPrice: product['oldPrice'],
-                  discountText: product['discountText'],
-                  rating: product['rating'],
-                  totalReviews: product['totalReviews'],
+                return InkWell(
+                  onTap: () {
+                    Get.to(DetailScreen());
+                  },
+                  child: HomeCard(
+                    imagePath: product['imagePath'],
+                    title: product['title'],
+                    description: product['description'],
+                    price: product['price'],
+                    oldPrice: product['oldPrice'],
+                    discountText: product['discountText'],
+                    rating: product['rating'],
+                    totalReviews: product['totalReviews'],
+                  ),
                 );
               },
             ),

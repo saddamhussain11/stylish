@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/controller/backend/auth_controller.dart';
 import 'package:stylish/utils/snackbar_utils.dart';
 import 'package:stylish/view/auth/login_screen.dart';
 import 'package:stylish/widget/Button/Custom_Buton.dart';
@@ -21,38 +24,39 @@ class SignupScreen extends StatefulWidget {
 class _LoginScreenState extends State<SignupScreen> {
   TextEditingController emailcontroler = TextEditingController();
   TextEditingController paswordcontroler = TextEditingController();
+  AuthController authController = Get.put(AuthController());
   final _formkey = GlobalKey<FormState>();
-  bool isloading = false;
+  // bool isloading = false;
 
-  void signup() async {
-    try {
-      setState(() {
-        isloading = true;
-      });
+  // void signup() async {
+  //   try {
+  //     setState(() {
+  //       isloading = true;
+  //     });
 
-      final response = await http.post(
-        Uri.parse('https://reqres.in/api/register'),
-        body: {'email': emailcontroler.text, 'password': paswordcontroler.text},
-        headers: {'x-api-key': 'reqres-free-v1'},
-      );
+  //     final response = await http.post(
+  //       Uri.parse('https://reqres.in/api/register'),
+  //       body: {'email': emailcontroler.text, 'password': paswordcontroler.text},
+  //       headers: {'x-api-key': 'reqres-free-v1'},
+  //     );
 
-      if (response.statusCode == 200) {
-        Get.to(LoginScreen());
-        SnackbarUtil.showSuccess('Creat acount succes');
-        print(response.statusCode);
-        print(response.body);
-      } else {
-        SnackbarUtil.showError('Creat Fail');
-        print('faillllllll');
-      }
-    } catch (e) {
-      SnackbarUtil.showError('Creat Fail');
-    } finally {
-      setState(() {
-        isloading = false;
-      });
-    }
-  }
+  //     if (response.statusCode == 200) {
+  //       Get.to(LoginScreen());
+  //       SnackbarUtil.showSuccess('Creat acount succes');
+  //       print(response.statusCode);
+  //       print(response.body);
+  //     } else {
+  //       SnackbarUtil.showError('Creat Fail');
+  //       print('faillllllll');
+  //     }
+  //   } catch (e) {
+  //     SnackbarUtil.showError('Creat Fail');
+  //   } finally {
+  //     setState(() {
+  //       isloading = false;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -167,18 +171,24 @@ class _LoginScreenState extends State<SignupScreen> {
                     ),
 
                     SizedBox(height: 45.h),
-                    Custombuton(
-                      isLoading: isloading,
-                      backgroundColor: Appcolors.pinkColor,
-                      height: 55.h,
-                      width: 320.w,
-                      borderRadius: BorderRadius.circular(5.r),
-                      title: 'Create Account',
-                      ontap: () {
-                        if (_formkey.currentState!.validate()) {
-                          signup();
-                        }
-                      },
+
+                    Obx(
+                      () => Custombuton(
+                        isLoading: authController.isLoading.value,
+                        backgroundColor: Appcolors.pinkColor,
+                        height: 55.h,
+                        width: 320.w,
+                        borderRadius: BorderRadius.circular(5.r),
+                        title: 'Create Account',
+                        ontap: () {
+                          if (_formkey.currentState!.validate()) {
+                            authController.signup(
+                              emailcontroler.text,
+                              paswordcontroler.text,
+                            );
+                          }
+                        },
+                      ),
                     ),
 
                     SizedBox(height: 28.h),

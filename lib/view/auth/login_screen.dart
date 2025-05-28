@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/utils/snackbar_utils.dart';
-import 'package:stylish/view/Botom_Navigartion/botom_navigation_screen.dart';
+import 'package:stylish/controller/backend/auth_controller.dart';
+
 import 'package:stylish/view/auth/forgat_screen.dart';
 import 'package:stylish/view/auth/signup_screen.dart';
 import 'package:stylish/widget/Button/Custom_Buton.dart';
@@ -24,43 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailcontroler = TextEditingController();
   TextEditingController paswordcontroler = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+
+  final AuthController authController = Get.put(AuthController());
   bool isLoading = false;
-  void login() async {
-    print('Tap on Login Button');
-
-    try {
-      setState(() {
-        isLoading = true;
-      }); // hit the API endpoint for login
-      final response = await http.post(
-        Uri.parse('https://reqres.in/api/login'),
-        body: {
-          'email': emailcontroler.text,
-          'password': paswordcontroler.text,
-          'adress': 'khanpur',
-        },
-        headers: {'x-api-key': 'reqres-free-v1'},
-      );
-      print('api hit successfully');
-      print(response.statusCode);
-
-      if (response.statusCode == 200) {
-        Get.to(BotomNavigationScreen());
-        SnackbarUtil.showSuccess('Login Succes');
-        print('Signup successful');
-        print(response.body.toString());
-      } else {
-        print('Login failed');
-      }
-    } catch (e) {
-      SnackbarUtil.showError('Login Fail');
-      print(e.toString());
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,18 +112,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     SizedBox(height: 45.h),
-                    Custombuton(
-                      isLoading: isLoading,
-                      backgroundColor: Appcolors.pinkColor,
-                      height: 55.h,
-                      width: 320.w,
-                      borderRadius: BorderRadius.circular(5.r),
-                      title: 'Login',
-                      ontap: () {
-                        if (_formkey.currentState!.validate()) {
-                          login();
-                        }
-                      },
+                    Obx(
+                      () => Custombuton(
+                        isLoading: authController.isLoading.value,
+                        backgroundColor: Appcolors.pinkColor,
+                        height: 55.h,
+                        width: 320.w,
+                        borderRadius: BorderRadius.circular(5.r),
+                        title: 'Login',
+                        ontap: () {
+                          if (_formkey.currentState!.validate()) {
+                            authController.login(
+                              emailcontroler.text,
+                              paswordcontroler.text,
+                            );
+                          }
+                        },
+                      ),
                     ),
 
                     SizedBox(height: 28.h),
@@ -196,5 +165,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailcontroler.dispose();
+    paswordcontroler.dispose();
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
 import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/controller/backend/add_to_cart_controller.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
