@@ -1,9 +1,13 @@
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:stylish/constant/appicons.dart';
 import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/controller/backend/product_controller.dart';
+import 'package:stylish/model/product_model.dart';
 import 'package:stylish/view/Detail/detail_screen.dart';
 import 'package:stylish/widget/card/home/home_card.dart';
 
@@ -15,6 +19,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ProductController productController = Get.put(ProductController());
+  @override
+  void initState() {
+    productController.getproduct();
+    super.initState();
+  }
+
   final List<Map<String, dynamic>> productList = [
     {
       'imagePath': Appimages.home2,
@@ -139,35 +150,50 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SizedBox(height: 20.h),
-            GridView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.all(12),
-              itemCount: productList.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 0.7, // Adjust aspect ratio as needed
-              ),
-              itemBuilder: (context, index) {
-                final product = productList[index];
-                return InkWell(
-                  onTap: () {
-                    Get.to(DetailScreen());
-                  },
-                  child: HomeCard(
-                    imagePath: product['imagePath'],
-                    title: product['title'],
-                    description: product['description'],
-                    price: product['price'],
-                    oldPrice: product['oldPrice'],
-                    discountText: product['discountText'],
-                    rating: product['rating'],
-                    totalReviews: product['totalReviews'],
-                  ),
+
+            Obx(() {
+              if (productController.isLoading.value) {
+                return const Center(
+                  child: CupertinoActivityIndicator(radius: 30),
                 );
-              },
-            ),
+              } else if (productController.productlist.isEmpty) {
+                return const Center(child: Text('No Product Found'));
+              } else {
+                return GridView.builder(
+                  padding: const EdgeInsets.all(12),
+                  shrinkWrap: true,
+                  itemCount: productController.productlist.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = productController.productlist[index];
+                    return InkWell(
+                      onTap: () {
+                        Get.to(
+                          DetailScreen(),
+                          arguments: productController.productlist[index],
+                        );
+                        // optional
+                      },
+                      child: HomeCard(
+                        imagePath: product.image ?? '',
+                        title: product.title ?? '',
+                        description: product.productdetail ?? '',
+                        price: product.newprice?.toInt() ?? 0,
+                        oldPrice: product.oldprice?.toInt() ?? 0,
+                        discountText: '50% OFF', // if needed
+                        rating: 4.5, // optional
+                        totalReviews: product.ratedpeople ?? 0,
+                      ),
+                    );
+                  },
+                );
+              }
+            }),
           ],
         ),
       ),

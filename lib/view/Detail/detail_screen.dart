@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/constant/appimages.dart';
-import 'package:stylish/controller/backend/add_to_cart_controller.dart';
+import 'package:stylish/model/product_model.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
@@ -19,12 +17,23 @@ class _DetailScreenState extends State<DetailScreen> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final args = Get.arguments;
+    // if (args == null) {
+    //   // Agar arguments nahi mile to user ko ek message dikhao ya home pe bhejo
+    //   return Scaffold(body: Center(child: Text("No product data received.")));
+    // }
+    final Result argument = args as Result;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.h,
         leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.w),
-          child: Icon(Appicons.arrow_back, size: 20.sp),
+          padding: EdgeInsets.symmetric(horizontal: 0.w),
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Appicons.arrow_back, size: 20.sp),
+          ),
         ),
 
         actions: [
@@ -49,14 +58,14 @@ class _DetailScreenState extends State<DetailScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.r),
                 image: DecorationImage(
-                  image: AssetImage(Appimages.favorite2),
+                  image: NetworkImage(argument.image ?? ''),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             SizedBox(height: 25.h),
             Text(
-              'Size: 7UK',
+              argument.size ?? '',
               style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -100,14 +109,14 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             SizedBox(height: 20.h),
             Text(
-              'NIke Sneakers',
+              argument.title ?? '',
               style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(height: 10.h),
             Text(
-              'Vision Alta Men’s Shoes Size (All Colours)',
+              argument.productcategory.toString(),
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w400),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -124,7 +133,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   Icon(Icons.star_half, color: Appcolors.amber, size: 16.sp),
                 SizedBox(width: 4),
                 Text(
-                  '56,890',
+                  argument.ratedpeople.toString(),
                   style: TextStyle(
                     color: Appcolors.blackColor.withOpacity(0.4),
                     fontSize: 14.sp,
@@ -139,7 +148,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Row(
                   children: [
                     Text(
-                      '₹${2999}',
+                      '₹${argument.oldprice}',
                       style: TextStyle(
                         decoration: TextDecoration.lineThrough,
                         color: Colors.grey,
@@ -148,7 +157,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      '₹${1500}',
+                      '₹${argument.newprice}',
                       style: TextStyle(color: Colors.grey, fontSize: 14.sp),
                     ),
                     SizedBox(width: 8.w),
@@ -175,8 +184,8 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(
               width: 470.w,
               child: Text(
+                argument.productdetail.toString(),
                 textAlign: TextAlign.start,
-                'Product DetailsPerhaps the most iconic sneaker of all-time, this original "Chicago"? colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the ...More',
                 style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w300),
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
