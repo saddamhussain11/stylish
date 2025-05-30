@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return GridView.builder(
                   padding: const EdgeInsets.all(12),
                   shrinkWrap: true,
-                  itemCount: productController.productlist.length,
+                  itemCount: productController.productlist.first.result!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
@@ -170,12 +170,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, index) {
-                    final product = productController.productlist[index];
+                    final product =
+                        productController.productlist.first.result![index];
                     return InkWell(
                       onTap: () {
                         Get.to(
                           DetailScreen(),
-                          arguments: productController.productlist[index],
+                          arguments:
+                              productController
+                                  .productlist
+                                  .first
+                                  .result![index],
                         );
                         // optional
                       },

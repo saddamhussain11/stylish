@@ -8,7 +8,7 @@ import 'package:stylish/utils/snackbar_utils.dart';
 
 class ProductController extends GetxController {
   final RxBool isLoading = false.obs;
-  final RxList<Result> productlist = <Result>[].obs;
+  final RxList<productModel> productlist = <productModel>[].obs;
 
   // Future fetchUserProfile() async {
   //   print('Tap on Login Button');
@@ -54,10 +54,10 @@ class ProductController extends GetxController {
       if (response.statusCode == 200) {
         final decodedData = jsonDecode(response.body);
 
-        final model = productModel.fromJson(decodedData);
+        final productModel model = productModel.fromJson(decodedData);
 
         // ✅ Assign List<Result> directly
-        productlist.assignAll(model.result ?? []);
+        productlist.assignAll([model]);
 
         print('Products loaded: ${productlist.length}');
       } else {

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
 import 'package:stylish/controller/backend/my_profile_controller.dart';
+import 'package:stylish/controller/backend/update_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -14,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  UpdateController updateController = Get.put(UpdateController());
   final MyProfileController myProfileController = Get.put(
     MyProfileController(),
   );
@@ -34,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Icon(Appicons.arrow_back, size: 20.sp),
         ),
         title: Text(
-          'Checkout',
+          'Profile',
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -42,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Obx(() {
         if (myProfileController.isLoading.value) {
           return const Center(child: CupertinoActivityIndicator(radius: 30));
-        } else if (myProfileController.listData.isEmpty) {
+        } else if (myProfileController.listData == null) {
           return Center(
             child: ElevatedButton(
               onPressed: () => myProfileController.fetchUserProfile(),
@@ -67,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: CircleAvatar(
                         radius: 50.r,
                         backgroundImage: NetworkImage(
-                          profile.data?.avatar ?? '',
+                          profile?.data?.avatar ?? '',
                         ),
                       ),
                     ),
@@ -84,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Appcolors.weightColor,
                           ),
                           onPressed: () {
-                            myProfileController.fetchUserProfile();
+                            updateController.updatedata();
                           },
                         ),
                       ),
@@ -94,8 +96,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 10.h),
               Text(
-                profile.data?.firstName ?? 'Name not available',
+                '${profile?.data?.firstName ?? 'First'} ${profile?.data?.lastName ?? 'Last'}',
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.h),
+              Text(
+                profile?.data?.email ?? 'Email not available',
+                style: TextStyle(fontSize: 14.sp, color: Colors.grey),
               ),
             ],
           );

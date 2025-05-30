@@ -24,18 +24,13 @@ class MyProfileController extends GetxController {
 
       if (response.statusCode == 200) {
         final decodedData = jsonDecode(response.body);
-
-        /// agar decodedData ek list ho
-        if (decodedData is List) {
-          listData.assignAll(
-            decodedData.map((e) => MyProfileModel.fromJson(e)).toList(),
-          );
-        }
-
-        print('Signup successful');
-        print(response.body.toString());
+        final MyProfileModel user = MyProfileModel.fromJson(decodedData);
+        print('decoded data..............${decodedData['data']}');
+        listData.add(user);
+        print('Data..................: ${listData}');
+        // print("User Email: ${listData.value?.data?.email}");
       } else {
-        print('Login failed');
+        print('API failed');
       }
     } catch (e) {
       print('Error: ${e.toString()}');

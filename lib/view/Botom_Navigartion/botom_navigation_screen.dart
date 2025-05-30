@@ -7,6 +7,7 @@ import 'package:stylish/view/Favorite/favorite_screen.dart';
 import 'package:stylish/view/Search/Search_screen.dart';
 import 'package:stylish/view/home/home_screen.dart';
 import 'package:stylish/view/profile/profile_screen.dart';
+import 'package:stylish/view/user_list_screen.dart';
 
 class BotomNavigationScreen extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _BottomNavWithFABState extends State<BotomNavigationScreen> {
   final List<Widget> _screens = [
     Center(child: HomeScreen()),
     Center(child: FavoriteScreen()),
-    Center(child: SearchScreen()),
+    Center(child: UserListScreen()),
     Center(child: ProfileScreen()),
   ];
 
