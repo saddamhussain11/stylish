@@ -8,7 +8,8 @@ import 'package:stylish/utils/snackbar_utils.dart';
 
 class ProductController extends GetxController {
   final RxBool isLoading = false.obs;
-  final RxList<productModel> productlist = <productModel>[].obs;
+  final RxList<ProductModel> productlist = <ProductModel>[].obs;
+  RxString image = ''.obs;
 
   // Future fetchUserProfile() async {
   //   print('Tap on Login Button');
@@ -49,17 +50,21 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
 
-      final response = await http.get(Uri.parse(ApiEndpoints.product));
+      final response = await http.get(
+        Uri.parse('https://fakestoreapi.com/products'),
+      );
 
       if (response.statusCode == 200) {
         final decodedData = jsonDecode(response.body);
-
-        final productModel model = productModel.fromJson(decodedData);
-
         // ✅ Assign List<Result> directly
-        productlist.assignAll([model]);
 
-        print('Products loaded: ${productlist.length}');
+        final skippedData = (decodedData as List).skip(1).toList();
+        print("Skipped Data: ${skippedData.length} items");
+        productlist.assignAll(
+          skippedData.map((e) => ProductModel.fromJson(e)).toList(),
+        );
+
+        print(decodedData);
       } else {
         SnackbarUtil.showError(
           'Failed to load products: ${response.statusCode}',

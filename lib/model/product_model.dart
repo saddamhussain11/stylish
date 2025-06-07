@@ -1,79 +1,63 @@
-class productModel {
-  String? status;
-  List<Result>? result;
-
-  productModel({this.status, this.result});
-
-  productModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    if (json['result'] != null) {
-      result = <Result>[];
-      json['result'].forEach((v) {
-        result!.add(new Result.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.result != null) {
-      data['result'] = this.result!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Result {
+class ProductModel {
   int? id;
-  String? image;
-  String? size;
-  String? name;
   String? title;
-  int? ratedpeople;
-  int? oldprice;
-  int? newprice;
-  String? productdetail;
-  String? productcategory;
+  double? price;
+  String? description;
+  String? category;
+  String? image;
+  Rating? rating;
 
-  Result({
+  ProductModel({
     this.id,
-    this.image,
-    this.size,
-    this.name,
     this.title,
-    this.ratedpeople,
-    this.oldprice,
-    this.newprice,
-    this.productdetail,
-    this.productcategory,
+    this.price,
+    this.description,
+    this.category,
+    this.image,
+    this.rating,
   });
 
-  Result.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    image = json['image'];
-    size = json['size'];
-    name = json['name'];
     title = json['title'];
-    ratedpeople = json['ratedpeople'];
-    oldprice = json['oldprice'];
-    newprice = json['newprice'];
-    productdetail = json['productdetail'];
-    productcategory = json['productcategory'];
+    price = json['price'];
+    description = json['description'];
+    category = json['category'];
+    image = json['image'];
+    rating =
+        json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['image'] = this.image;
-    data['size'] = this.size;
-    data['name'] = this.name;
     data['title'] = this.title;
-    data['ratedpeople'] = this.ratedpeople;
-    data['oldprice'] = this.oldprice;
-    data['newprice'] = this.newprice;
-    data['productdetail'] = this.productdetail;
-    data['productcategory'] = this.productcategory;
+    data['price'] = this.price;
+    data['description'] = this.description;
+    data['category'] = this.category;
+    data['image'] = this.image;
+    if (this.rating != null) {
+      data['rating'] = this.rating!.toJson();
+    }
+    return data;
+  }
+}
+
+class Rating {
+  double? rate;
+  int? count;
+
+  Rating({this.rate, this.count});
+
+  Rating.fromJson(Map<String, dynamic> json) {
+    rate = json['rate'];
+    count = json['count'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['rate'] = this.rate;
+    data['count'] = this.count;
     return data;
   }
 }

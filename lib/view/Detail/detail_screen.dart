@@ -22,7 +22,7 @@ class _DetailScreenState extends State<DetailScreen> {
     //   // Agar arguments nahi mile to user ko ek message dikhao ya home pe bhejo
     //   return Scaffold(body: Center(child: Text("No product data received.")));
     // }
-    final Result argument = args as Result;
+    final argument = args;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.h,

@@ -156,13 +156,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 return const Center(
                   child: CupertinoActivityIndicator(radius: 30),
                 );
-              } else if (productController.productlist.isEmpty) {
+              } else if (productController.productlist.isEmpty
+              //  productController.productlist.isEmpty
+              ) {
                 return const Center(child: Text('No Product Found'));
               } else {
                 return GridView.builder(
                   padding: const EdgeInsets.all(12),
                   shrinkWrap: true,
-                  itemCount: productController.productlist.first.result!.length,
+                  itemCount: 1,
+                  // productController.productlist.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
@@ -170,29 +173,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, index) {
-                    final product =
-                        productController.productlist.first.result![index];
+                    final product = productController.productlist[index];
                     return InkWell(
                       onTap: () {
                         Get.to(
                           DetailScreen(),
-                          arguments:
-                              productController
-                                  .productlist
-                                  .first
-                                  .result![index],
+                          arguments: productController.productlist[index],
                         );
                         // optional
                       },
                       child: HomeCard(
                         imagePath: product.image ?? '',
                         title: product.title ?? '',
-                        description: product.productdetail ?? '',
-                        price: product.newprice?.toInt() ?? 0,
-                        oldPrice: product.oldprice?.toInt() ?? 0,
+                        description: product.description ?? '',
+                        price: double.parse(product.price.toString()) ?? 0.0,
+                        oldPrice: 0,
                         discountText: '50% OFF', // if needed
-                        rating: 4.5, // optional
-                        totalReviews: product.ratedpeople ?? 0,
+                        rating: product.rating!.rate!.toDouble(),
+
+                        // optional
+                        totalReviews: product.rating!.count!.toInt(),
                       ),
                     );
                   },

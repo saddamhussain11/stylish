@@ -7,8 +7,8 @@ class HomeCard extends StatelessWidget {
   final String imagePath;
   final String title;
   final String description;
-  final int price;
-  final int oldPrice;
+  final double price;
+  final int? oldPrice;
   final String discountText;
   final double rating;
   final int totalReviews;
@@ -19,7 +19,7 @@ class HomeCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.price,
-    required this.oldPrice,
+    this.oldPrice,
     required this.discountText,
     required this.rating,
     required this.totalReviews,
