@@ -48,7 +48,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(height: 21.h),
-
                     SizedBox(height: 15.h),
                     Form(
                       key: _formkey,
@@ -77,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             border: true,
                             labeltext: 'Enter your pasword',
                             inputType: TextInputType.visiblePassword,
-
                             showSuffixIcon: true,
                             validator: (value) {
                               if (value == '' || value == null) {
@@ -130,7 +128,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     ),
-
+                    Custombuton(
+                      isLoading: authController.isLoading.value,
+                      backgroundColor: Appcolors.pinkColor,
+                      height: 55.h,
+                      width: 320.w,
+                      borderRadius: BorderRadius.circular(5.r),
+                      title: 'Login',
+                      ontap: () {
+                        if (_formkey.currentState!.validate()) {
+                          authController.login(
+                            emailcontroler.text,
+                            paswordcontroler.text,
+                          );
+                        }
+                      },
+                    ),
                     SizedBox(height: 28.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
