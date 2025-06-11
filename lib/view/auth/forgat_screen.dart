@@ -40,7 +40,6 @@ class _LoginScreenState extends State<ForgatScreen> {
                       ),
                     ),
                     SizedBox(height: 21.h),
-
                     SizedBox(height: 15.h),
                     Form(
                       key: _formkey,
@@ -63,7 +62,6 @@ class _LoginScreenState extends State<ForgatScreen> {
                         ],
                       ),
                     ),
-
                     SizedBox(height: 45.h),
                     Custombuton(
                       backgroundColor: Appcolors.pinkColor,
@@ -73,7 +71,22 @@ class _LoginScreenState extends State<ForgatScreen> {
                       title: 'Send',
                       ontap: () {},
                     ),
-
+                    Custombuton(
+                      backgroundColor: Appcolors.pinkColor,
+                      height: 55.h,
+                      width: 320.w,
+                      borderRadius: BorderRadius.circular(5.r),
+                      title: 'Send',
+                      ontap: () {},
+                    ),
+                    Custombuton(
+                      backgroundColor: Appcolors.pinkColor,
+                      height: 55.h,
+                      width: 320.w,
+                      borderRadius: BorderRadius.circular(5.r),
+                      title: 'Send',
+                      ontap: () {},
+                    ),
                     SizedBox(height: 28.h),
                   ],
                 ),

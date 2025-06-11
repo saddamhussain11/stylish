@@ -185,24 +185,6 @@ class _LoginScreenState extends State<SignupScreen> {
                         },
                       ),
                     ),
-                    Obx(
-                      () => Custombuton(
-                        isLoading: authController.isLoading.value,
-                        backgroundColor: Appcolors.pinkColor,
-                        height: 55.h,
-                        width: 320.w,
-                        borderRadius: BorderRadius.circular(5.r),
-                        title: 'Create Account',
-                        ontap: () {
-                          if (_formkey.currentState!.validate()) {
-                            authController.signup(
-                              emailcontroler.text,
-                              paswordcontroler.text,
-                            );
-                          }
-                        },
-                      ),
-                    ),
                     SizedBox(height: 28.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
