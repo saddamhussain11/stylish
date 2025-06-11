@@ -80,7 +80,6 @@ class _LoginScreenState extends State<SignupScreen> {
                       ),
                     ),
                     SizedBox(height: 21.h),
-
                     SizedBox(height: 15.h),
                     Form(
                       key: _formkey,
@@ -147,16 +146,14 @@ class _LoginScreenState extends State<SignupScreen> {
                               text: 'By clicking the ', // black part
                               style: TextStyle(
                                 fontSize: 13.sp,
-
                                 color: Appcolors.blackColor,
                               ),
                               children: [
                                 TextSpan(
                                   text: 'Register',
                                   style: TextStyle(
-                                    color:
-                                        Appcolors
-                                            .pinkColor, // 🔴 red color for 'Register'
+                                    color: Appcolors
+                                        .pinkColor, // 🔴 red color for 'Register'
                                   ),
                                 ),
                                 TextSpan(
@@ -169,9 +166,7 @@ class _LoginScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
-
                     SizedBox(height: 45.h),
-
                     Obx(
                       () => Custombuton(
                         isLoading: authController.isLoading.value,
@@ -190,7 +185,24 @@ class _LoginScreenState extends State<SignupScreen> {
                         },
                       ),
                     ),
-
+                    Obx(
+                      () => Custombuton(
+                        isLoading: authController.isLoading.value,
+                        backgroundColor: Appcolors.pinkColor,
+                        height: 55.h,
+                        width: 320.w,
+                        borderRadius: BorderRadius.circular(5.r),
+                        title: 'Create Account',
+                        ontap: () {
+                          if (_formkey.currentState!.validate()) {
+                            authController.signup(
+                              emailcontroler.text,
+                              paswordcontroler.text,
+                            );
+                          }
+                        },
+                      ),
+                    ),
                     SizedBox(height: 28.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
