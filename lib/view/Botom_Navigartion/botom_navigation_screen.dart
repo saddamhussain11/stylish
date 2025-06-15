@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/constant/appcolors.dart';
 import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/view/Checkout/checkout_screen.dart';
+import 'package:stylish/data/app_exception.dart';
 import 'package:stylish/view/Favorite/favorite_screen.dart';
-import 'package:stylish/view/Search/Search_screen.dart';
 import 'package:stylish/view/home/home_screen.dart';
 import 'package:stylish/view/profile/profile_screen.dart';
 import 'package:stylish/view/user_list_screen.dart';
@@ -47,7 +46,10 @@ class _BottomNavWithFABState extends State<BotomNavigationScreen> {
         child: FloatingActionButton(
           backgroundColor: Appcolors.weightColor,
           shape: CircleBorder(),
-          onPressed: () {},
+          onPressed: () {
+            print('tapppppppppppp');
+            throw InternetExcaption('heloooooooooo');
+          },
           child: Icon(Appicons.cart_shopping_outlined),
         ),
       ),
