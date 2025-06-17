@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appcolors.dart';
+import 'package:stylish/res/constant/appcolors.dart';
 
 class Custombuton extends StatelessWidget {
   final String? title; // Optional child widget
@@ -40,36 +40,33 @@ class Custombuton extends StatelessWidget {
         height: height ?? 20.h, // Default height if not provided
         width: width ?? 50.w, // Default width if not provided
         decoration: BoxDecoration(
-          color:
-              colors == null
-                  ? backgroundColor
-                  : null, // Use solid color if gradient is not provided
-          gradient:
-              colors != null
-                  ? LinearGradient(colors: colors!, begin: begin, end: end)
-                  : null, // Use gradient only if colors are provided
+          color: colors == null
+              ? backgroundColor
+              : null, // Use solid color if gradient is not provided
+          gradient: colors != null
+              ? LinearGradient(colors: colors!, begin: begin, end: end)
+              : null, // Use gradient only if colors are provided
           shape: shape,
           borderRadius: shape == BoxShape.circle ? null : borderRadius,
           border: border, // Apply optional border
         ),
         child: Center(
-          child:
-              isLoading == true
-                  ? SizedBox(
-                    height: 20.h,
-                    width: 20.w,
-                    child: CircularProgressIndicator(
-                      color: Appcolors.weightColor,
-                    ),
-                  )
-                  : Text(
-                    title.toString(),
-                    style: TextStyle(
-                      fontSize: 21.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Appcolors.weightColor,
-                    ),
+          child: isLoading == true
+              ? SizedBox(
+                  height: 20.h,
+                  width: 20.w,
+                  child: CircularProgressIndicator(
+                    color: Appcolors.weightColor,
                   ),
+                )
+              : Text(
+                  title.toString(),
+                  style: TextStyle(
+                    fontSize: 21.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Appcolors.weightColor,
+                  ),
+                ),
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:stylish/res/getx_localization/languages.dart';
+import 'package:stylish/res/routes/routes_.dart';
 import 'package:stylish/view/Botom_Navigartion/botom_navigation_screen.dart';
 
 import 'package:stylish/view/profile/profile_screen.dart';
@@ -25,6 +27,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Stylish',
           home: BotomNavigationScreen(),
+          translations: Languages(),
+          locale: const Locale('en', 'US'),
+          fallbackLocale: Locale('en', 'US'),
+          getPages: Routes.approutes(),
         );
       },
     );

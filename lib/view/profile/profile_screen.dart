@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
 import 'package:stylish/controller/backend/my_profile_controller.dart';
 import 'package:stylish/controller/backend/update_controller.dart';
 

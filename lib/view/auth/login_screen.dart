@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
 import 'package:stylish/controller/backend/auth_controller.dart';
 
 import 'package:stylish/view/auth/forgat_screen.dart';

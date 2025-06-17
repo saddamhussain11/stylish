@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
 
 class FavoriteCard extends StatelessWidget {
   final String imagePath;
@@ -18,7 +18,6 @@ class FavoriteCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.price,
-
     required this.rating,
     required this.totalReviews,
   });

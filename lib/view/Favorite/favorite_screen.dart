@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/res/constant/appicons.dart';
+import 'package:stylish/res/constant/appimages.dart';
 import 'package:stylish/widget/card/favorite/favorite_card.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -18,7 +18,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Floral Summer Dress',
       'description': 'Lightweight floral dress perfect for summer.',
       'price': 999,
-
       'rating': 4.5,
       'totalReviews': 1345,
     },
@@ -27,7 +26,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Evening Gown',
       'description': 'Elegant gown for special occasions.',
       'price': 2599,
-
       'rating': 4.8,
       'totalReviews': 2300,
     },
@@ -36,7 +34,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Casual Maxi Dress',
       'description': 'Comfortable everyday wear.',
       'price': 1499,
-
       'rating': 4.2,
       'totalReviews': 980,
     },
@@ -45,7 +42,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Bodycon Party Dress',
       'description': 'Stylish bodycon perfect for night outs.',
       'price': 1899,
-
       'rating': 4.6,
       'totalReviews': 1600,
     },
@@ -54,7 +50,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Ethnic Kurti',
       'description': 'Traditional yet trendy ethnic wear.',
       'price': 799,
-
       'rating': 4.0,
       'totalReviews': 2000,
     },
@@ -63,7 +58,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Sleeveless Midi Dress',
       'description': 'Great for formal and semi-formal events.',
       'price': 1199,
-
       'rating': 4.3,
       'totalReviews': 1150,
     },
@@ -72,7 +66,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Printed Long Dress',
       'description': 'Chic prints with vibrant colors.',
       'price': 1349,
-
       'rating': 4.4,
       'totalReviews': 980,
     },
@@ -81,7 +74,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Wrap Dress',
       'description': 'Soft fabric, comfortable and stylish.',
       'price': 1099,
-
       'rating': 4.1,
       'totalReviews': 890,
     },
@@ -90,7 +82,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Denim Shirt Dress',
       'description': 'Trendy and versatile for any season.',
       'price': 1599,
-
       'rating': 4.7,
       'totalReviews': 1765,
     },
@@ -99,7 +90,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Lace Overlay Dress',
       'description': 'Elegant lace with body-fit style.',
       'price': 1999,
-
       'rating': 4.9,
       'totalReviews': 2100,
     },
@@ -108,7 +98,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Pleated Midi Dress',
       'description': 'Perfect for office or casual lunch.',
       'price': 1399,
-
       'rating': 4.3,
       'totalReviews': 1000,
     },
@@ -117,7 +106,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Ruffle Sleeve Dress',
       'description': 'Stylish and flowy design.',
       'price': 1249,
-
       'rating': 4.0,
       'totalReviews': 875,
     },
@@ -126,7 +114,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Tiered Maxi Dress',
       'description': 'Layered look for a modern touch.',
       'price': 1449,
-
       'rating': 4.6,
       'totalReviews': 1240,
     },
@@ -135,7 +122,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       'title': 'Off-Shoulder Dress',
       'description': 'Trendy style with flattering fit.',
       'price': 1699,
-
       'rating': 4.8,
       'totalReviews': 1950,
     },
@@ -185,7 +171,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   title: product['title'],
                   description: product['description'],
                   price: product['price'],
-
                   rating: product['rating'],
                   totalReviews: product['totalReviews'],
                 );

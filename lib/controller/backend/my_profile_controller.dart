@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:stylish/constant/api_endpoints.dart';
+import 'package:stylish/res/constant/api_endpoints.dart';
 import 'package:stylish/model/my_profile_model.dart';
 
 class MyProfileController extends GetxController {

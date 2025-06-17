@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:stylish/model/product_model.dart';
-import 'package:stylish/utils/snackbar_utils.dart';
+import 'package:stylish/res/utils/toast_utils.dart';
 
 class ProductController extends GetxController {
   final RxBool isLoading = false.obs;
@@ -65,12 +65,12 @@ class ProductController extends GetxController {
 
         print(decodedData);
       } else {
-        SnackbarUtil.showError(
+        ToastUtils.showError(
           'Failed to load products: ${response.statusCode}',
         );
       }
     } catch (e) {
-      SnackbarUtil.showError('Product Not Found');
+      ToastUtils.showError('Product Not Found');
       print("Error: $e");
     } finally {
       isLoading.value = false;

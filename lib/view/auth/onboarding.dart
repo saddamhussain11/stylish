@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appimages.dart';
 import 'package:stylish/widget/Button/Custom_Buton.dart';
 
 class Onboarding extends StatelessWidget {

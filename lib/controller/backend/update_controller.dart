@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:stylish/constant/api_endpoints.dart';
+import 'package:stylish/res/constant/api_endpoints.dart';
 import 'package:stylish/model/product_model.dart';
-import 'package:stylish/utils/snackbar_utils.dart';
+import 'package:stylish/res/utils/toast_utils.dart';
 
 class UpdateController extends GetxController {
   final RxBool isLoading = false.obs;
@@ -23,14 +23,14 @@ class UpdateController extends GetxController {
       print(response.statusCode);
       if (response.statusCode == 200) {
         print('user deleted successfull');
-        SnackbarUtil.showSuccess('$name deleted successfull');
+        ToastUtils.showSuccess('$name deleted successfull');
       } else {
-        SnackbarUtil.showError(
+        ToastUtils.showError(
           ' ${name}Failed to update: ${response.statusCode}',
         );
       }
     } catch (e) {
-      SnackbarUtil.showError('no update');
+      ToastUtils.showError('no update');
       print("Error: $e");
     } finally {
       isLoading.value = false;

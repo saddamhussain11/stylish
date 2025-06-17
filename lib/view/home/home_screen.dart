@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/res/constant/appicons.dart';
+import 'package:stylish/res/constant/appimages.dart';
 import 'package:stylish/controller/backend/product_controller.dart';
 import 'package:stylish/model/product_model.dart';
 import 'package:stylish/view/Detail/detail_screen.dart';
@@ -93,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 6.w),
         child: Column(
@@ -150,15 +149,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SizedBox(height: 20.h),
-
             Obx(() {
               if (productController.isLoading.value) {
                 return const Center(
                   child: CupertinoActivityIndicator(radius: 30),
                 );
               } else if (productController.productlist.isEmpty
-              //  productController.productlist.isEmpty
-              ) {
+                  //  productController.productlist.isEmpty
+                  ) {
                 return const Center(child: Text('No Product Found'));
               } else {
                 return GridView.builder(

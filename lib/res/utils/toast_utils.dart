@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
 
-class SnackbarUtil {
+class ToastUtils {
+  static void fieldfocusedchange(
+      BuildContext context, FocusNode current, FocusNode nextfocus) {
+    current.unfocus();
+    FocusScope.of(context).requestFocus(nextfocus);
+  }
+
   static void showSuccess(String message, {String title = "Success"}) {
     _showSnackbar(title, message, Appcolors.litegreenColor, Appicons.succes);
   }

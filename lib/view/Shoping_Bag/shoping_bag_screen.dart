@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
-import 'package:stylish/constant/appimages.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
+import 'package:stylish/res/constant/appimages.dart';
 
 class ShopingBagScreen extends StatefulWidget {
   const ShopingBagScreen({super.key});
@@ -86,7 +86,6 @@ class _ShopingBagScreenState extends State<ShopingBagScreen> {
                                         ),
                                       ),
                                       SizedBox(height: 5.h),
-
                                       SizedBox(
                                         width: 180.w,
                                         child: Text(
@@ -117,22 +116,19 @@ class _ShopingBagScreenState extends State<ShopingBagScreen> {
                                               value: selectedSize,
                                               underline: SizedBox(),
                                               iconSize: 20.sp,
-                                              items:
-                                                  ['S', 'M', 'L', 'XL'].map((
-                                                    String value,
-                                                  ) {
-                                                    return DropdownMenuItem<
-                                                      String
-                                                    >(
-                                                      value: value,
-                                                      child: Text(
-                                                        value,
-                                                        style: TextStyle(
-                                                          fontSize: 12.sp,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }).toList(),
+                                              items: ['S', 'M', 'L', 'XL'].map((
+                                                String value,
+                                              ) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
                                               onChanged: (newValue) {
                                                 setState(() {
                                                   selectedSize = newValue;
@@ -165,23 +161,20 @@ class _ShopingBagScreenState extends State<ShopingBagScreen> {
                                               value: selectedQuantity,
                                               underline: SizedBox(),
                                               iconSize: 20.sp,
-                                              items:
-                                                  List.generate(
-                                                    10,
-                                                    (index) => index + 1,
-                                                  ).map((int value) {
-                                                    return DropdownMenuItem<
-                                                      int
-                                                    >(
-                                                      value: value,
-                                                      child: Text(
-                                                        value.toString(),
-                                                        style: TextStyle(
-                                                          fontSize: 12.sp,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }).toList(),
+                                              items: List.generate(
+                                                10,
+                                                (index) => index + 1,
+                                              ).map((int value) {
+                                                return DropdownMenuItem<int>(
+                                                  value: value,
+                                                  child: Text(
+                                                    value.toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
                                               onChanged: (newValue) {
                                                 setState(() {
                                                   selectedQuantity = newValue;
@@ -302,7 +295,6 @@ class _ShopingBagScreenState extends State<ShopingBagScreen> {
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w500,
-
                                     color: Appcolors.pinkColor,
                                   ),
                                 ),

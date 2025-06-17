@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:stylish/constant/api_endpoints.dart';
+import 'package:stylish/res/constant/api_endpoints.dart';
 import 'package:stylish/model/auth_models/login_model.dart';
 import 'package:stylish/model/auth_models/signup_model.dart';
-import 'package:stylish/utils/snackbar_utils.dart';
+import 'package:stylish/res/utils/toast_utils.dart';
 import 'package:stylish/view/Botom_Navigartion/botom_navigation_screen.dart';
 import 'package:stylish/view/auth/login_screen.dart';
 
@@ -35,14 +35,14 @@ class AuthController extends GetxController {
 
       if (response.statusCode == 200) {
         Get.to(BotomNavigationScreen());
-        SnackbarUtil.showSuccess('Login Succes');
+        ToastUtils.showSuccess('Login Succes');
         print('Signup successful');
         print(response.body.toString());
       } else {
         print('Login failed');
       }
     } catch (e) {
-      SnackbarUtil.showError('Login Fail');
+      ToastUtils.showError('Login Fail');
       print(e.toString());
     } finally {
       isLoading.value = false;
@@ -62,12 +62,12 @@ class AuthController extends GetxController {
       print(response.statusCode);
       if (response.statusCode == 200) {
         Get.to(LoginScreen());
-        SnackbarUtil.showSuccess('Signup Succes');
+        ToastUtils.showSuccess('Signup Succes');
       } else {
-        SnackbarUtil.showError('Signup Fail');
+        ToastUtils.showError('Signup Fail');
       }
     } catch (e) {
-      SnackbarUtil.showError('Signup Fail');
+      ToastUtils.showError('Signup Fail');
     } finally {
       isLoading.value = false;
     }

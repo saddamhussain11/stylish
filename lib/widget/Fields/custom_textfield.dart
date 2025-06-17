@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appcolors.dart';
+import 'package:stylish/res/constant/appcolors.dart';
 
 class CustomTextfield extends StatefulWidget {
   final String labeltext;
@@ -23,7 +23,6 @@ class CustomTextfield extends StatefulWidget {
     required this.color,
     required this.labeltext,
     required this.inputType,
-
     this.iconData,
     this.showSuffixIcon = false,
     this.borderColor,
@@ -63,27 +62,25 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       decoration: InputDecoration(
         fillColor: widget.color,
         filled: true,
-        prefixIcon:
-            widget.iconData != null
-                ? Icon(
-                  widget.iconData,
-                  color: Appcolors.blackColor,
-                  size: 24.sp,
-                )
-                : null,
-        suffixIcon:
-            widget.showSuffixIcon
-                ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isvisible = !isvisible;
-                    });
-                  },
-                  icon: Icon(
-                    isvisible ? Icons.visibility_off : Icons.visibility,
-                  ),
-                )
-                : widget.sufixicon,
+        prefixIcon: widget.iconData != null
+            ? Icon(
+                widget.iconData,
+                color: Appcolors.blackColor,
+                size: 24.sp,
+              )
+            : null,
+        suffixIcon: widget.showSuffixIcon
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    isvisible = !isvisible;
+                  });
+                },
+                icon: Icon(
+                  isvisible ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
+            : widget.sufixicon,
         hintText: widget.labeltext,
         hintStyle: TextStyle(color: Appcolors.blackColor, fontSize: 16.sp),
         enabledBorder: OutlineInputBorder(

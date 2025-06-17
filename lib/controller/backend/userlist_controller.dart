@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:stylish/model/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:stylish/model/user_model2.dart';
-import 'package:stylish/utils/snackbar_utils.dart';
+import 'package:stylish/res/utils/toast_utils.dart';
 
 class UserlistController extends GetxController {
   final RxBool isLoading = false.obs;
@@ -24,7 +24,7 @@ class UserlistController extends GetxController {
         userlist.assignAll([user]);
       }
     } catch (e) {
-      SnackbarUtil.showError('Data not found');
+      ToastUtils.showError('Data not found');
     } finally {
       isLoading.value = false;
     }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
 import 'package:stylish/model/product_model.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -35,7 +35,6 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Icon(Appicons.arrow_back, size: 20.sp),
           ),
         ),
-
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -96,10 +95,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     child: Text(
                       sizes[index],
                       style: TextStyle(
-                        color:
-                            isSelected
-                                ? Appcolors.weightColor
-                                : Appcolors.pinkColor,
+                        color: isSelected
+                            ? Appcolors.weightColor
+                            : Appcolors.pinkColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -250,7 +248,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     Positioned(
                       right: 93.w,
                       bottom: 7.h,
-
                       child: Container(
                         height: 45.h, // Bigger than button height
                         width: 40.w,
@@ -305,7 +302,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     Positioned(
                       right: 93.w,
                       bottom: 7.h,
-
                       child: Container(
                         height: 45.h, // Bigger than button height
                         width: 40.w,

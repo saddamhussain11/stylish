@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stylish/constant/appcolors.dart';
-import 'package:stylish/constant/appicons.dart';
+import 'package:stylish/res/constant/appcolors.dart';
+import 'package:stylish/res/constant/appicons.dart';
 import 'package:stylish/data/app_exception.dart';
 import 'package:stylish/view/Favorite/favorite_screen.dart';
 import 'package:stylish/view/home/home_screen.dart';
