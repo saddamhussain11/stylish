@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
-import 'package:stylish/widget/Button/Custom_Buton.dart';
-import 'package:stylish/widget/Fields/custom_textfield.dart';
+import 'package:stylish/res/components/Button/Custom_Buton.dart';
+import 'package:stylish/res/components/Fields/custom_textfield.dart';
 
 class ForgatScreen extends StatefulWidget {
   const ForgatScreen({super.key});

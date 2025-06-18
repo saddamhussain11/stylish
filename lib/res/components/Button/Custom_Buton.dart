@@ -62,7 +62,7 @@ class Custombuton extends StatelessWidget {
               : Text(
                   title.toString(),
                   style: TextStyle(
-                    fontSize: 21.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: Appcolors.weightColor,
                   ),

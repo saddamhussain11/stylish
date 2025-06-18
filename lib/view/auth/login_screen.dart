@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
-import 'package:stylish/controller/backend/auth_controller.dart';
+import 'package:stylish/res/utils/toast_utils.dart';
+import 'package:stylish/view_model/controller/backend/auth_controller.dart';
 
 import 'package:stylish/view/auth/forgat_screen.dart';
 import 'package:stylish/view/auth/signup_screen.dart';
-import 'package:stylish/widget/Button/Custom_Buton.dart';
-import 'package:stylish/widget/Fields/custom_textfield.dart';
+import 'package:stylish/res/components/Button/Custom_Buton.dart';
+import 'package:stylish/res/components/Fields/custom_textfield.dart';
+import 'package:stylish/view_model/controller/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formkey = GlobalKey<FormState>();
 
   final AuthController authController = Get.put(AuthController());
+  final loginVM = Get.put(LoginViewModel());
   bool isLoading = false;
 
   @override
@@ -55,7 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         spacing: 26.h,
                         children: [
                           CustomTextfield(
-                            controller: emailcontroler,
+                            controller: loginVM.emailcontroller.value,
+                            focusNode: loginVM.emailFocusNode.value,
                             width: 30.w,
                             color: Appcolors.greyColor,
                             labeltext: 'Enter your Ful Email',
@@ -67,9 +71,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                               return null;
                             },
+                            onFieldSubmitted: (value) {
+                              ToastUtils.fieldfocusedchange(
+                                  context,
+                                  loginVM.emailFocusNode.value,
+                                  loginVM.passwordFocusNode.value);
+                            },
                           ),
                           CustomTextfield(
-                            controller: paswordcontroler,
+                            controller: loginVM.passwordcontroller.value,
+                            focusNode: loginVM.passwordFocusNode.value,
                             width: 320.w,
                             color: Appcolors.greyColor,
                             iconData: Appicons.lock,

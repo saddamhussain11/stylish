@@ -6,7 +6,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:stylish/controller/backend/userlist_controller.dart';
+import 'package:stylish/view_model/controller/backend/userlist_controller.dart';
 
 class UserListScreen extends StatefulWidget {
   @override

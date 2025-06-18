@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/res/constant/appicons.dart';
 import 'package:stylish/res/constant/appimages.dart';
-import 'package:stylish/widget/card/favorite/favorite_card.dart';
+import 'package:stylish/res/components/card/favorite/favorite_card.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});

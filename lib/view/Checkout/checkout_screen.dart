@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
 import 'package:stylish/res/constant/appimages.dart';
-import 'package:stylish/widget/card/checkout/checkout_card.dart';
+import 'package:stylish/res/components/card/checkout/checkout_card.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});

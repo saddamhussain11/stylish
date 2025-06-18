@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           title: 'Stylish',
           home: BotomNavigationScreen(),
           translations: Languages(),
-          locale: const Locale('en', 'US'),
+          locale: const Locale('ur', 'PK'),
           fallbackLocale: Locale('en', 'US'),
           getPages: Routes.approutes(),
         );

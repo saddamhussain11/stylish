@@ -17,6 +17,8 @@ class CustomTextfield extends StatefulWidget {
   final bool? border;
   final bool? readonly;
   final BorderRadius? borderRadius;
+  final FocusNode? focusNode;
+  final void Function(String)? onFieldSubmitted;
 
   CustomTextfield({
     super.key,
@@ -33,6 +35,8 @@ class CustomTextfield extends StatefulWidget {
     this.border,
     this.readonly,
     this.borderRadius,
+    this.focusNode,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -53,12 +57,14 @@ class _CustomTextfieldState extends State<CustomTextfield> {
     return TextFormField(
       obscureText: widget.showSuffixIcon ? isvisible : false,
       controller: widget.controller,
+      focusNode: widget.focusNode,
       keyboardType: widget.inputType,
       textAlign: TextAlign.start,
       textAlignVertical: TextAlignVertical.center,
       readOnly: widget.readonly ?? false,
       style: TextStyle(color: Appcolors.blackColor, fontSize: 16.sp),
       validator: widget.validator,
+      onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         fillColor: widget.color,
         filled: true,

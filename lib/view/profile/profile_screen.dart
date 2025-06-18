@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
-import 'package:stylish/controller/backend/my_profile_controller.dart';
-import 'package:stylish/controller/backend/update_controller.dart';
+import 'package:stylish/view_model/controller/backend/my_profile_controller.dart';
+import 'package:stylish/view_model/controller/backend/update_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

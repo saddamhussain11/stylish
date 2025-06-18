@@ -8,11 +8,11 @@ import 'package:http/http.dart' as http;
 
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
-import 'package:stylish/controller/backend/auth_controller.dart';
+import 'package:stylish/view_model/controller/backend/auth_controller.dart';
 import 'package:stylish/res/utils/toast_utils.dart';
 import 'package:stylish/view/auth/login_screen.dart';
-import 'package:stylish/widget/Button/Custom_Buton.dart';
-import 'package:stylish/widget/Fields/custom_textfield.dart';
+import 'package:stylish/res/components/Button/Custom_Buton.dart';
+import 'package:stylish/res/components/Fields/custom_textfield.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
