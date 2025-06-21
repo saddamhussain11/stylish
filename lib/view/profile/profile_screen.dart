@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
+import 'package:stylish/res/routes/routes_names.dart';
 import 'package:stylish/view_model/controller/backend/my_profile_controller.dart';
 import 'package:stylish/view_model/controller/backend/update_controller.dart';
+import 'package:stylish/view_model/controller/user_prefrences/user_prefrences_view_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -40,6 +42,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8..w),
+            child: InkWell(
+                onTap: () {
+                  UserPrefrencesViewModel userPrefrences =
+                      UserPrefrencesViewModel();
+                  userPrefrences.clearUser().then((value) {
+                    if (value) {
+                      Get.offAllNamed(RoutesNames
+                          .loginScreen); // Adjust the route as needed
+                    }
+                  });
+                },
+                child: Icon(Icons.logout, size: 20.sp)),
+          )
+        ],
       ),
       body: Obx(() {
         if (myProfileController.isLoading.value) {

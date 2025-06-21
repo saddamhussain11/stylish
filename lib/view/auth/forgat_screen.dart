@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:stylish/res/constant/appcolors.dart';
 import 'package:stylish/res/constant/appicons.dart';
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<ForgatScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Forgat Screen',
+                      'forgat_password'.tr,
                       style: TextStyle(
                         fontSize: 36.sp,
                         fontWeight: FontWeight.w700,
@@ -49,12 +50,12 @@ class _LoginScreenState extends State<ForgatScreen> {
                           CustomTextfield(
                             width: 30.w,
                             color: Appcolors.greyColor,
-                            labeltext: 'Enter your Ful Email',
+                            labeltext: 'email_hint'.tr,
                             inputType: TextInputType.text,
                             iconData: Appicons.person,
                             validator: (value) {
                               if (value == '' || value == null) {
-                                return 'Please enter your Email';
+                                return 'email_hint'.tr;
                               }
                               return null;
                             },

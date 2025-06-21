@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:stylish/res/constant/api_endpoints.dart';
+import 'package:stylish/res/app_url/api_url.dart';
 import 'package:stylish/model/product_model.dart';
 import 'package:stylish/res/utils/toast_utils.dart';
 

@@ -73,138 +73,134 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 70.h,
-          leading: Padding(
+      appBar: AppBar(
+        toolbarHeight: 70.h,
+        leading: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25.w),
+          child: Icon(Appicons.menu),
+        ),
+        title: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25.w),
+          child: Image.asset(Appimages.stylishlogo),
+        ),
+        centerTitle: true,
+        actions: [
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.w),
-            child: Icon(Appicons.menu),
-          ),
-          title: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.w),
-            child: Image.asset(Appimages.stylishlogo),
-          ),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: CircleAvatar(
-                backgroundImage: AssetImage(Appimages.profile),
-                radius: 20.r,
-              ),
+            child: CircleAvatar(
+              backgroundImage: AssetImage(Appimages.profile),
+              radius: 20.r,
             ),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 6.w),
+        child: Column(
+          children: [
+            SizedBox(height: 10.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(Appimages.homecircle1),
+                      radius: 20.r,
+                    ),
+                    Text('Beuty', style: TextStyle(fontSize: 10.sp)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(Appimages.homecircle2),
+                      radius: 20.r,
+                    ),
+                    Text('Fashion', style: TextStyle(fontSize: 10.sp)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(Appimages.homecircle3),
+                      radius: 20.r,
+                    ),
+                    Text('Kids', style: TextStyle(fontSize: 10.sp)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(Appimages.homecircle4),
+                      radius: 20.r,
+                    ),
+                    Text('Mens', style: TextStyle(fontSize: 10.sp)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(Appimages.homecircle5),
+                      radius: 20.r,
+                    ),
+                    Text('Womens', style: TextStyle(fontSize: 10.sp)),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 20.h),
+            Obx(() {
+              if (productController.isLoading.value) {
+                return const Center(
+                  child: CupertinoActivityIndicator(radius: 30),
+                );
+              } else if (productController.productlist.isEmpty
+                  //  productController.productlist.isEmpty
+                  ) {
+                return const Center(child: Text('No Product Found'));
+              } else {
+                return GridView.builder(
+                  padding: const EdgeInsets.all(12),
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  // productController.productlist.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = productController.productlist[index];
+                    return InkWell(
+                      onTap: () {
+                        Get.to(
+                          DetailScreen(),
+                          arguments: productController.productlist[index],
+                        );
+                        // optional
+                      },
+                      child: HomeCard(
+                        imagePath: product.image ?? '',
+                        title: product.title ?? '',
+                        description: product.description ?? '',
+                        price: double.parse(product.price.toString()) ?? 0.0,
+                        oldPrice: 0,
+                        discountText: '50% OFF', // if needed
+                        rating: product.rating!.rate!.toDouble(),
+
+                        // optional
+                        totalReviews: product.rating!.count!.toInt(),
+                      ),
+                    );
+                  },
+                );
+              }
+            }),
           ],
         ),
-        body: InternetExcaptionWidget(
-          ontap: () {},
-        )
-
-        // Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 6.w),
-        //   child: Column(
-        //     children: [
-        //       SizedBox(height: 10.h),
-        //       Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //         children: [
-        //           Column(
-        //             children: [
-        //               CircleAvatar(
-        //                 backgroundImage: AssetImage(Appimages.homecircle1),
-        //                 radius: 20.r,
-        //               ),
-        //               Text('Beuty', style: TextStyle(fontSize: 10.sp)),
-        //             ],
-        //           ),
-        //           Column(
-        //             children: [
-        //               CircleAvatar(
-        //                 backgroundImage: AssetImage(Appimages.homecircle2),
-        //                 radius: 20.r,
-        //               ),
-        //               Text('Fashion', style: TextStyle(fontSize: 10.sp)),
-        //             ],
-        //           ),
-        //           Column(
-        //             children: [
-        //               CircleAvatar(
-        //                 backgroundImage: AssetImage(Appimages.homecircle3),
-        //                 radius: 20.r,
-        //               ),
-        //               Text('Kids', style: TextStyle(fontSize: 10.sp)),
-        //             ],
-        //           ),
-        //           Column(
-        //             children: [
-        //               CircleAvatar(
-        //                 backgroundImage: AssetImage(Appimages.homecircle4),
-        //                 radius: 20.r,
-        //               ),
-        //               Text('Mens', style: TextStyle(fontSize: 10.sp)),
-        //             ],
-        //           ),
-        //           Column(
-        //             children: [
-        //               CircleAvatar(
-        //                 backgroundImage: AssetImage(Appimages.homecircle5),
-        //                 radius: 20.r,
-        //               ),
-        //               Text('Womens', style: TextStyle(fontSize: 10.sp)),
-        //             ],
-        //           ),
-        //         ],
-        //       ),
-        //       SizedBox(height: 20.h),
-        //       Obx(() {
-        //         if (productController.isLoading.value) {
-        //           return const Center(
-        //             child: CupertinoActivityIndicator(radius: 30),
-        //           );
-        //         } else if (productController.productlist.isEmpty
-        //             //  productController.productlist.isEmpty
-        //             ) {
-        //           return const Center(child: Text('No Product Found'));
-        //         } else {
-        //           return GridView.builder(
-        //             padding: const EdgeInsets.all(12),
-        //             shrinkWrap: true,
-        //             itemCount: 1,
-        //             // productController.productlist.length,
-        //             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //               crossAxisCount: 2,
-        //               mainAxisSpacing: 10,
-        //               crossAxisSpacing: 10,
-        //               childAspectRatio: 0.7,
-        //             ),
-        //             itemBuilder: (context, index) {
-        //               final product = productController.productlist[index];
-        //               return InkWell(
-        //                 onTap: () {
-        //                   Get.to(
-        //                     DetailScreen(),
-        //                     arguments: productController.productlist[index],
-        //                   );
-        //                   // optional
-        //                 },
-        //                 child: HomeCard(
-        //                   imagePath: product.image ?? '',
-        //                   title: product.title ?? '',
-        //                   description: product.description ?? '',
-        //                   price: double.parse(product.price.toString()) ?? 0.0,
-        //                   oldPrice: 0,
-        //                   discountText: '50% OFF', // if needed
-        //                   rating: product.rating!.rate!.toDouble(),
-
-        //                   // optional
-        //                   totalReviews: product.rating!.count!.toInt(),
-        //                 ),
-        //               );
-        //             },
-        //           );
-        //         }
-        //       }),
-        //     ],
-        //   ),
-        // ),
-        );
+      ),
+    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:stylish/data/app_exception.dart';
 import 'package:stylish/data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
+import 'package:stylish/res/app_url/api_url.dart';
 
 class NetworkApiServices extends BaseApiServices {
   @override
@@ -35,9 +36,11 @@ class NetworkApiServices extends BaseApiServices {
     }
     dynamic responseJson;
     try {
-      final response = await http
-          .post(Uri.parse(url), body: jsonEncode(data))
-          .timeout(const Duration(seconds: 30));
+      final response = await http.post(
+        Uri.parse(url),
+        body: data,
+        headers: {ApiUrl.apikey: ApiUrl.apikeyValue},
+      ).timeout(const Duration(seconds: 10));
 
       responseJson = returnResponse(response);
     } on SocketException {
@@ -45,7 +48,9 @@ class NetworkApiServices extends BaseApiServices {
     } on TimeoutException {
       throw RequestTimeout('');
     }
-
+    if (kDebugMode) {
+      print(responseJson);
+    }
     return responseJson;
   }
 
@@ -65,11 +70,13 @@ class NetworkApiServices extends BaseApiServices {
     switch (response.statusCode) {
       case 200:
         dynamic responsejson = jsonDecode(response.body);
+        final token = responsejson['token'];
+        if (kDebugMode) {
+          print('Response Token: $token');
+        }
         return responsejson;
-
       case 400:
-        throw InvalidUrl('');
-
+        throw InvalidUrl;
       default:
         throw FetchDataExcaption('An Error Ocured With Comunication' +
             response.statusCode.toString());

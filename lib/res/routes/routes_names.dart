@@ -12,4 +12,5 @@ class RoutesNames {
   static const String searchscreen = '/search_Scren';
   static const String shopingbagscreen = '/shoping_bag_Scren';
   static const String userlistscreen = '/userlist_Scren';
+  static const String botomnavscreen = '/botomnav_Scren';
 }

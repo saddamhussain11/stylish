@@ -11,7 +11,7 @@ import 'package:stylish/view/auth/forgat_screen.dart';
 import 'package:stylish/view/auth/signup_screen.dart';
 import 'package:stylish/res/components/Button/Custom_Buton.dart';
 import 'package:stylish/res/components/Fields/custom_textfield.dart';
-import 'package:stylish/view_model/controller/login_view_model.dart';
+import 'package:stylish/view_model/controller/login/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Welcome back',
+                      'Welcome_back'.tr,
                       style: TextStyle(
                         fontSize: 36.sp,
                         fontWeight: FontWeight.w700,
@@ -62,12 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             focusNode: loginVM.emailFocusNode.value,
                             width: 30.w,
                             color: Appcolors.greyColor,
-                            labeltext: 'Enter your Ful Email',
+                            labeltext: 'email_hint'.tr,
                             inputType: TextInputType.text,
                             iconData: Appicons.person,
                             validator: (value) {
                               if (value == '' || value == null) {
-                                return 'Please enter your Email';
+                                return 'email_hint'.tr;
                               }
                               return null;
                             },
@@ -85,14 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Appcolors.greyColor,
                             iconData: Appicons.lock,
                             border: true,
-                            labeltext: 'Enter your pasword',
+                            labeltext: 'password_hint'.tr,
                             inputType: TextInputType.visiblePassword,
                             showSuffixIcon: true,
                             validator: (value) {
                               if (value == '' || value == null) {
-                                return 'Please enter your Pasword';
+                                return 'password_hint'.tr;
                               } else if (value.length < 6) {
-                                return 'Enter at least 6 digit';
+                                return '6_digit_validation'.tr;
                               }
                               return null;
                             },
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Text(
                             textAlign: TextAlign.end,
-                            'Forgot Password ?',
+                            'forgat_password'.tr,
                             style: TextStyle(
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w500,
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 45.h),
                     Obx(
                       () => Custombuton(
-                        isLoading: authController.isLoading.value,
+                        isLoading: loginVM.isLoading.value,
                         backgroundColor: Appcolors.pinkColor,
                         height: 55.h,
                         width: 320.w,
@@ -131,10 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: 'Login',
                         ontap: () {
                           if (_formkey.currentState!.validate()) {
-                            authController.login(
-                              emailcontroler.text,
-                              paswordcontroler.text,
-                            );
+                            loginVM.loginapi();
                           }
                         },
                       ),
@@ -144,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Creat an account ?',
+                          'create_an_account'.tr,
                           style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,

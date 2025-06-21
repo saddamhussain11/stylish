@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:stylish/res/routes/routes_names.dart';
+import 'package:stylish/view/Botom_Navigartion/botom_navigation_screen.dart';
 import 'package:stylish/view/Checkout/checkout_screen.dart';
 import 'package:stylish/view/Detail/detail_screen.dart';
 import 'package:stylish/view/Favorite/favorite_screen.dart';
@@ -28,5 +29,8 @@ class Routes {
         GetPage(
             name: RoutesNames.shopingbagscreen, page: () => ShopingBagScreen()),
         GetPage(name: RoutesNames.userlistscreen, page: () => UserListScreen()),
+        GetPage(
+            name: RoutesNames.botomnavscreen,
+            page: () => BotomNavigationScreen()),
       ];
 }

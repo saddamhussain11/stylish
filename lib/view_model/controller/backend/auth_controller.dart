@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:stylish/res/constant/api_endpoints.dart';
+import 'package:stylish/res/app_url/api_url.dart';
 import 'package:stylish/model/auth_models/login_model.dart';
 import 'package:stylish/model/auth_models/signup_model.dart';
 import 'package:stylish/res/utils/toast_utils.dart';
@@ -24,9 +24,9 @@ class AuthController extends GetxController {
         password: passwordController,
       );
       final response = await http.post(
-        Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.login}'),
+        Uri.parse(ApiUrl.loginapi),
         body: loginModel.toJson(),
-        headers: {ApiEndpoints.apikey: ApiEndpoints.apikeyValue},
+        headers: {ApiUrl.apikey: ApiUrl.apikeyValue},
       );
       final decodedData = jsonDecode(response.body);
 
@@ -54,9 +54,9 @@ class AuthController extends GetxController {
       isLoading.value = true;
       signupModel signupmodel = signupModel(email: email, password: pasword);
       final response = await http.post(
-        Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.register}'),
+        Uri.parse(ApiUrl.registerapi),
         body: signupmodel.toJson(),
-        headers: {ApiEndpoints.apikey: ApiEndpoints.apikeyValue},
+        headers: {ApiUrl.apikey: ApiUrl.apikeyValue},
       );
       print('Api hit succesfuly');
       print(response.statusCode);

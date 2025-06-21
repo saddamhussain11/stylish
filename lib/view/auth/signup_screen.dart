@@ -73,7 +73,7 @@ class _LoginScreenState extends State<SignupScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Create an account',
+                      'create_an_account'.tr,
                       style: TextStyle(
                         fontSize: 36.sp,
                         fontWeight: FontWeight.w700,
@@ -90,12 +90,12 @@ class _LoginScreenState extends State<SignupScreen> {
                             controller: emailcontroler,
                             width: 30.w,
                             color: Appcolors.greyColor,
-                            labeltext: 'Enter your Ful Email',
+                            labeltext: 'email_hint'.tr,
                             inputType: TextInputType.text,
                             iconData: Appicons.person,
                             validator: (value) {
                               if (value == '' || value == null) {
-                                return 'Please enter your Email';
+                                return 'email_hint'.tr;
                               }
                               return null;
                             },
@@ -104,13 +104,13 @@ class _LoginScreenState extends State<SignupScreen> {
                             controller: paswordcontroler,
                             width: 30.w,
                             color: Appcolors.greyColor,
-                            labeltext: 'Enter your pasword',
+                            labeltext: 'password_hint'.tr,
                             inputType: TextInputType.visiblePassword,
                             showSuffixIcon: true,
                             iconData: Appicons.person,
                             validator: (value) {
                               if (value == '' || value == null) {
-                                return 'Please enter your pasword';
+                                return 'password_hint'.tr;
                               }
                               return null;
                             },
@@ -143,22 +143,23 @@ class _LoginScreenState extends State<SignupScreen> {
                           width: 270.w,
                           child: Text.rich(
                             TextSpan(
-                              text: 'By clicking the ', // black part
+                              text:
+                                  'registerAgreementTextPart1'.tr, // black part
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 color: Appcolors.blackColor,
                               ),
                               children: [
                                 TextSpan(
-                                  text: 'Register',
+                                  text: 'registerAgreementRegister'.tr,
                                   style: TextStyle(
                                     color: Appcolors
                                         .pinkColor, // 🔴 red color for 'Register'
                                   ),
                                 ),
                                 TextSpan(
-                                  text:
-                                      ' button, you agree to the public offer', // black part again
+                                  text: 'registerAgreementTextPart2'
+                                      .tr, // black part again
                                 ),
                               ],
                             ),
@@ -174,7 +175,7 @@ class _LoginScreenState extends State<SignupScreen> {
                         height: 55.h,
                         width: 320.w,
                         borderRadius: BorderRadius.circular(5.r),
-                        title: 'Create Account',
+                        title: 'sign_up'.tr,
                         ontap: () {
                           if (_formkey.currentState!.validate()) {
                             authController.signup(
@@ -190,7 +191,7 @@ class _LoginScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'I Already Have an Account',
+                          'alreadyHaveAccount'.tr,
                           style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,

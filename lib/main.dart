@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:stylish/res/getx_localization/languages.dart';
 import 'package:stylish/res/routes/routes_.dart';
-import 'package:stylish/view/Botom_Navigartion/botom_navigation_screen.dart';
+import 'package:stylish/view/auth/splash_screen.dart';
 
-import 'package:stylish/view/profile/profile_screen.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Stylish',
-          home: BotomNavigationScreen(),
+          home: SplashScreen(),
           translations: Languages(),
-          locale: const Locale('ur', 'PK'),
+          locale: const Locale('en', 'US'),
           fallbackLocale: Locale('en', 'US'),
           getPages: Routes.approutes(),
         );

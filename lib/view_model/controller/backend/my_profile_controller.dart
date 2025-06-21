@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:stylish/res/constant/api_endpoints.dart';
+import 'package:stylish/res/app_url/api_url.dart';
 import 'package:stylish/model/my_profile_model.dart';
 
 class MyProfileController extends GetxController {
@@ -16,8 +16,8 @@ class MyProfileController extends GetxController {
       isLoading.value = true;
 
       final response = await http.get(
-        Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.profile}'),
-        headers: {ApiEndpoints.apikey: ApiEndpoints.apikeyValue},
+        Uri.parse(ApiUrl.profileapi),
+        headers: {ApiUrl.apikey: ApiUrl.apikeyValue},
       );
       print('API hit successfully');
       print('Status Code: ${response.statusCode}');
