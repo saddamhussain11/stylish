@@ -9,6 +9,7 @@ class ApiUrl {
   static const String registerapi = '$baseUrl/api/register';
   static const String profileapi = '$baseUrl/api/users/2';
   static const String updateapi = '$baseUrl/api/users/2';
+  static const String userlistapi = '$baseUrl/users?page=2';
 
   static const String productapi =
       'https://faux-api.com/api/v1/newitems_8485479356474048';

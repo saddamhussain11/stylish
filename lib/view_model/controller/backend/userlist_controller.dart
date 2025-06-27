@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:stylish/data/response/status.dart';
 import 'package:stylish/model/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:stylish/model/user_model2.dart';
+import 'package:stylish/repositry/user_list/user_list_repositry.dart';
 import 'package:stylish/res/utils/toast_utils.dart';
 
 class UserlistController extends GetxController {
@@ -28,5 +30,27 @@ class UserlistController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  final api = UserListRepositry();
+  final status = Status.LODING.obs;
+  final Rx<Usermodel2> userslist = Usermodel2().obs;
+
+  void setstatus(Status value) => status.value = value;
+  void setuserlist(Usermodel2 value) {
+    userslist.value = value;
+  }
+
+  void getuserlist() {
+    api.userlistrepo().then(
+      (value) {
+        setstatus(Status.COMPLETED);
+        setuserlist(value);
+      },
+    ).onError(
+      (error, stackTrace) {
+        setstatus(Status.ERROR);
+      },
+    );
   }
 }

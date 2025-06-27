@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:stylish/data/response/status.dart';
+import 'package:stylish/repositry/profile/profile_repositry.dart';
 import 'package:stylish/res/app_url/api_url.dart';
 import 'package:stylish/model/my_profile_model.dart';
 
@@ -37,5 +39,51 @@ class MyProfileController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  final profilerepo = ProfileRepositry();
+
+  final status = Status.LODING.obs;
+  final Rx<MyProfileModel> profilelist = MyProfileModel().obs;
+  final RxString error = ''.obs;
+  void setstatus(Status value) {
+    status.value = value;
+  }
+
+  void setprofilelist(MyProfileModel value) {
+    profilelist.value = value;
+  }
+
+  void seteror(String value) {
+    error.value = value;
+  }
+
+  void getprofile() {
+    profilerepo.getprofiledata().then(
+      (value) {
+        setstatus(Status.COMPLETED);
+        setprofilelist(value);
+      },
+    ).onError(
+      (error, stackTrace) {
+        seteror(error.toString());
+        setstatus(Status.ERROR);
+      },
+    );
+  }
+
+  void refreshprofile() {
+    setstatus(Status.LODING);
+    profilerepo.getprofiledata().then(
+      (value) {
+        setstatus(Status.COMPLETED);
+        setprofilelist(value);
+      },
+    ).onError(
+      (error, stackTrace) {
+        seteror(error.toString());
+        setstatus(Status.ERROR);
+      },
+    );
   }
 }
